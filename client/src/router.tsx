@@ -14,6 +14,7 @@ import AdminProducts from "./pages/admin/AdminProducts";
 import AdminPromos from "./pages/admin/AdminPromos";
 import AdminSettings from "./pages/admin/AdminSettings";
 import CustomrProfilePage from "./pages/customer/ProfilePage";
+import Collections from "@/pages/customer/Collections.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
           {
             path: "sign-up/*",
             element: <SignUpPage />,
+          },
+          {
+            path: "collections",
+            element: <Collections />,
           },
         ],
       },

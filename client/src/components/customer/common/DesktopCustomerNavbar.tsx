@@ -26,8 +26,8 @@ type NavItem = {
 };
 
 const collectionPage: NavItem = {
-  label: "collection",
-  href: "/collection",
+  label: "Collections",
+  href: "/collections",
   icon: ShoppingBag,
 };
 

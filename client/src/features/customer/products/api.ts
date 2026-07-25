@@ -8,11 +8,11 @@ import type {
 
 
 export async function getCustomerCategories() {
-    return apiGet<ProductCategory>("/customer/categories");
+    return apiGet<ProductCategory[]>("/customer/categories");
 }
 
 export async function getCustomerBrands() {
-    return apiGet<ProductBrand>("/customer/brands");
+    return apiGet<ProductBrand[]>("/customer/brands");
 }
 
 export async function getCustomerProducts(params: GetCustomerProductsParams) {
@@ -35,7 +35,7 @@ export async function getCustomerProducts(params: GetCustomerProductsParams) {
     }
     const queryString = searchParams.toString();
     const url = queryString ? `/customer/products?${queryString}` : "/customer/products";
-    return apiGet<CustomerProduct>(url)
+    return apiGet<CustomerProduct[]>(url)
 }
 
 export async function getCustomerProductDetails(productId:string){
