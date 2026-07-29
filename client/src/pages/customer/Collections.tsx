@@ -4,6 +4,7 @@ import { useCustomerCollections } from "@/features/customer/products/use-custome
 
 import CommonLoader from "@/components/common/Loader.tsx";
 import CustomerProductFilterPanel from "@/components/customer/Products/CustomerProductFilterPanel.tsx";
+import CustomerProductCardSkeleton from "@/components/customer/Products/CustomerProductSkleton";
 import {
   Select,
   SelectContent,
@@ -14,8 +15,22 @@ import {
 import type { ProductSort } from "@/features/customer/products/types";
 
 export default function Collections() {
-  const { categories, brands, products, loading, sort, changeSort } =
-    useCustomerCollections();
+  const {
+    categories,
+    brands,
+    products,
+    loading,
+    sort,
+    changeSort,
+    filters,
+    clearFilters,
+    toggleFacetFilter,
+    availableColors,
+    hasActiveFilters,
+    activeFilterBadge,
+    productsLoading,
+    colorsLoading,
+  } = useCustomerCollections();
   if (loading) return <CommonLoader />;
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
@@ -43,6 +58,12 @@ export default function Collections() {
             <CustomerProductFilterPanel
               categories={categories}
               brands={brands}
+              filters={filters}
+              availableColors={availableColors}
+              onClearFilters={clearFilters}
+              onToggleFacet={toggleFacetFilter}
+              hasActiveFilters={hasActiveFilters}
+              colorLoading={colorsLoading}
             />
           </Card>
         </aside>
@@ -75,13 +96,21 @@ export default function Collections() {
               </Select>
             </div>
           </div>
-          {!loading && products.length ? (
+          {productsLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <CustomerProductCardSkeleton />
+            </div>
+          ) : products.length ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
               {products.map((item) => (
                 <CustomerProductCard key={item._id} product={item} />
               ))}
             </div>
-          ) : null}
+          ) : (
+            <p className="text-sm text-slate-500 text-center py-10">
+              No products found.
+            </p>
+          )}
         </main>
       </div>
     </div>
