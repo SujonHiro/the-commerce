@@ -35,7 +35,7 @@ export const getProducts = asyncHandler(
       query.colors = color;
     }
     if (size) {
-      query.size = size;
+      query.sizes = size;
     }
 
     let sortOptions: Record<string, 1 | -1> = {
