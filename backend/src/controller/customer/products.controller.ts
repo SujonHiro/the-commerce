@@ -1,7 +1,7 @@
 import { type Request, type Response } from "express";
+import { Product } from "../../models/Product.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import { successResponse } from "../../utils/envelope.js";
-import { Product } from "../../models/Product.js";
 import { requireFound } from "../../utils/helper.js";
 
 type ProductSort = "recent" | "price-high" | "price-low";
@@ -32,7 +32,7 @@ export const getProducts = asyncHandler(
       query.brand = brand;
     }
     if (color) {
-      query.color = color;
+      query.colors = color;
     }
     if (size) {
       query.size = size;
